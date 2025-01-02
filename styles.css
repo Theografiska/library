@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px dotted gray;
+    margin: 1rem;
+    gap: .5rem;
+    padding: .5rem;
+}
+
+.book-content:first-child {
+    font-weight: bold;
+}
+
