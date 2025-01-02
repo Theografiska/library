@@ -4,9 +4,16 @@
     box-sizing: border-box;
 }
 
+header {
+    padding: 1rem;
+}
+
 #card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    background-color: aliceblue;
+    gap: 1rem;
+    padding: 2rem 1rem;
 }
 
 .book-card {
@@ -14,12 +21,50 @@
     flex-direction: column;
     justify-content: center;
     border: 1px dotted gray;
-    margin: 1rem;
     gap: .5rem;
     padding: .5rem;
+    background-color: white;
+    border-radius: .5rem;
 }
 
 .book-content:first-child {
     font-weight: bold;
 }
 
+#add-book-btn {
+    margin: 1rem;
+    padding: .5rem;
+}
+
+#form-section {
+    display: none;
+}
+
+form {
+    margin: 1rem;
+    max-width: 60%; 
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form select {
+    height: 2rem;
+}
+
+form h3 {
+    margin-bottom: 1rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+form input, form select {
+    margin-bottom: .5rem;
+}
+
+#form-submit {
+    margin: 0 1rem;
+    padding: 0.5rem;
+}

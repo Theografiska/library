@@ -7,10 +7,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <h1>Psychology Top Reads</h1>
+    </header>
     <div id="card-container">
 
     </div>
+    <div>
+        <button id="add-book-btn">Add new book</button>
+    </div>
 
+    <div id="form-section">
+        <form>
+            <h3>Fill in the following information about the book:</h3>
+            <div class="form-item">
+                <label for="new-title">Title of the book: </label>
+                <input type="text" name="new-title" id="new-title" placeholder="Title" required>
+            </div>
+    
+            <div class="form-item">
+                <label for="new-author">Author of the book: </label>
+                <input type="text" name="new-author" id="new-author" placeholder="Author" required>
+            </div>
+    
+            <div class="form-item">
+                <label for="new-pages">Number of pages: </label>
+                <input type="number" name="new-pages" id="new-pages" placeholder="Number of pages" required>
+            </div>
+    
+            <div class="form-item">
+                <label for="new-read">Read or not: </label>
+                <select name="new-read" name="new-read" id="new-read" required>
+                    <option value="Read">Read</option>
+                    <option value="Not read">Not read</option>
+                    <option value="Currently reading">Currently reading</option>
+                </select>
+            </div>
+            
+        </form>
+    
+        <input type="submit" id="form-submit"> <!--placed it outside of form to prevent sending data. Could have also used event.preventDefault() -->
+     
+    </div>
+    
     <script src="script.js"></script>
 </body>
 </html>
