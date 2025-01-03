@@ -12,15 +12,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: #435643;
     color: beige;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    align-items: center;
 }
 
 header {
@@ -45,20 +37,37 @@ h2 {
     margin: 2rem 0;
 }
 
-#card-container {
+#psychology-section, #business-section {
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 4rem;
+}
+
+#psychology-section {
+    background-color: #435643;
+}
+
+#business-section {
+    background-color: #3B5882;
+}
+
+.card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: .5rem;
 }
 
-@media  screen and (max-width: 1000px) {
-    #card-container {
+@media screen and (max-width: 1000px) {
+    .card-container {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media  screen and (max-width: 750px) {
-    #card-container {
+@media screen and (max-width: 750px) {
+    .card-container {
         grid-template-columns: 1fr;
     }
 }
@@ -93,50 +102,15 @@ h2 {
     display: none;
 }
 
-#add-book-btn {
-    margin: 1rem 0;
-    padding: .5rem 1rem;
-    background-color: #755526;
-    color: beige;
-    border: none;
-    border-radius: 1rem;
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.1rem;
     font-weight: bold;
-    font-size: 1.25rem;
-    box-shadow: 4px 4px 8px #3f3c36;
+    border: none;
+    background: none;
     cursor: pointer;
-}
-
-#form-section {
-    display: none;
-}
-
-form {
-    margin: 0 auto;
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-}
-
-form input, form select {
-    height: 2rem;
-}
-
-form h3 {
-    margin-bottom: 1rem;
-}
-
-.form-item {
-    display: flex;
-    flex-direction: column;
-}
-
-form input, form select {
-    margin-bottom: .5rem;
-}
-
-#form-submit {
-    padding: 0.5rem;
-    margin: 1rem auto;
 }
 
 .read-btn {
@@ -150,15 +124,51 @@ form input, form select {
     box-shadow: 4px 4px 8px #3f3c36;
 }
 
-.delete-btn {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
+.add-book-btn {
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    background-color: #755526;
+    color: beige;
     border: none;
-    background: none;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+    box-shadow: 4px 4px 8px #3f3c36;
     cursor: pointer;
+}
+
+
+#psych-form-section, #business-form-section {
+    display: none;
+    margin: 3rem 0;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, select {
+    height: 2rem;
+    max-width: 400px;
+    margin-bottom: .5rem;
+}
+
+form h3 {
+    margin-bottom: 1rem;
+}
+
+.form-item {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#psych-form-submit, #business-form-submit {
+    padding: 0.5rem;
+    margin: 1rem auto;
+    background-color: #755526;
+    color: beige;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 4px 4px 8px #3f3c36;
 }
 
 footer {
