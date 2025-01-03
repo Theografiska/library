@@ -66,11 +66,7 @@ const loopThroughArray = array => {
         /* toggle reading status button and functionality */
 
         let readButton = document.createElement("button");
-        if(array[i].read === "Read") {
-            readButton.textContent = "Not read";
-        } else if(array[i].read === "Not read") {
-            readButton.textContent = "Read";
-        }
+        readButton.textContent = "Update reading status";
         readButton.classList.add("read-btn");
         bookCard.appendChild(readButton);
 
@@ -81,18 +77,16 @@ const loopThroughArray = array => {
             if(array[i].read === "Read") {
                 textElements.textContent = "";
                 addContent();
-                readButton.textContent = "Not read";
             } else if(array[i].read === "Not read") {
                 textElements.textContent = "";
                 addContent();
-                readButton.textContent = "Read";
             }
         })
 
         /* functionality to delete a book */
         
         let deleteButton = document.createElement("button");
-        deleteButton.textContent = "Remove book";
+        deleteButton.textContent = "X";
         deleteButton.classList.add("delete-btn");
         bookCard.appendChild(deleteButton);
 
@@ -121,6 +115,7 @@ const formSection = document.querySelector("#form-section");
 
 addBookButton.addEventListener("click", () => {
     formSection.style.display = "block";
+    addBookButton.style.display = "none";
 
     /* resetting data */
     
@@ -139,6 +134,8 @@ addBookButton.addEventListener("click", () => {
 const formSubmitbutton = document.querySelector("#form-submit");
 
 formSubmitbutton.addEventListener("click", () => {
+    addBookButton.style.display = "block";
+
     let newTitle = document.querySelector("#new-title").value;
     let newAuthor = document.querySelector("#new-author").value;
     let newPages = document.querySelector("#new-pages").value;
@@ -171,12 +168,7 @@ formSubmitbutton.addEventListener("click", () => {
     /* toggle reading status button and functionality */
 
     let readButton = document.createElement("button");
-    readButton.textContent = "Toggle reading status";
-    if(anotherBook.read === "Read") {
-        readButton.textContent = "Not read";
-    } else if(anotherBook.read === "Not read") {
-        readButton.textContent = "Read";
-    }
+    readButton.textContent = "Update reading status";
     readButton.classList.add("read-btn");
     bookCard.appendChild(readButton);
 
@@ -187,17 +179,15 @@ formSubmitbutton.addEventListener("click", () => {
         if(myLibrary[newIndex].read === "Read") {
             textElements.textContent = "";
             addMoreContent();
-            readButton.textContent = "Not read";
         } else if(myLibrary[newIndex].read === "Not read") {
             textElements.textContent = "";
             addMoreContent();
-            readButton.textContent = "Read";
         }
     })
     
     /* functionality to delete a book */
     let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Remove book";
+    deleteButton.textContent = "X";
     deleteButton.classList.add("delete-btn");
     bookCard.appendChild(deleteButton);
     deleteButton.addEventListener("click", () => {
