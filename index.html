@@ -9,32 +9,38 @@
 <body>
     <header>
         <h1>Theo's Library</h1>
+        <nav>
+            <ul>
+                <li><a href="#psychology-section">Psychology</a></li>
+                <li><a href="#business-section">Business</a></li>
+            </ul>
+        </nav>
     </header>
     <main>
         <div id="psychology-section">
-            <h2>Psychology Section</h2>
+            <h2><span id="psychology-header"></span>Psychology Section</h2>
             <div id="psych-book-section">
                 <div id="psych-card-container" class="card-container">
                 </div>
             
             </div>
-            <button id="add-psych-book-btn" class="add-book-btn">Add new book</button>
+            <button id="add-psych-book-btn" class="add-book-btn">Add new psychology book</button>
             <div id="psych-form-section">
                 <form>
                     <h3>Fill in the following information about the book:</h3>
                     <div class="form-item">
                         <label for="new-title">Title of the book: </label>
-                        <input type="text" name="new-title" id="new-title" placeholder="Title" required>
+                        <input type="text" name="new-title" id="new-title" placeholder="The 7 Habits of Highly Effective People" required>
                     </div>
             
                     <div class="form-item">
                         <label for="new-author">Author of the book: </label>
-                        <input type="text" name="new-author" id="new-author" placeholder="Author" required>
+                        <input type="text" name="new-author" id="new-author" placeholder="Stephen R. Covey" required>
                     </div>
             
                     <div class="form-item">
                         <label for="new-pages">Number of pages: </label>
-                        <input type="number" name="new-pages" id="new-pages" placeholder="Number of pages" required>
+                        <input type="number" name="new-pages" id="new-pages" placeholder="381" required>
                     </div>
             
                     <div class="form-item">
@@ -46,35 +52,35 @@
                     </div>
             
                 </form>
-                <input type="submit" id="psych-form-submit"> <!--placed it outside of form to prevent sending data. Could have also used event.preventDefault() -->
+                <input type="submit" id="psych-form-submit" class="submit-button"> <!--placed it outside of form to prevent sending data. Could have also used event.preventDefault() -->
             </div>
         </div>
 
 
         <div id="business-section">
-            <h2>Business Section</h2>
+            <h2><span id="business-header"></span>Business Section</h2>
             <div id="business-book-section">
                 <div id="business-card-container" class="card-container">
 
                 </div>
             </div>
-            <button id="add-business-book-btn" class="add-book-btn">Add new book</button>
+            <button id="add-business-book-btn" class="add-book-btn">Add new business book</button>
             <div id="business-form-section" class="form-section">
                 <form>
                     <h3>Fill in the following information about the book:</h3>
                     <div class="form-item">
                         <label for="new-business-title">Title of the book: </label>
-                        <input type="text" name="new-business-title" id="new-business-title" placeholder="Title" required>
+                        <input type="text" name="new-business-title" id="new-business-title" placeholder="The Power Law: Venture Capital and the Making of the New Future" required>
                     </div>
             
                     <div class="form-item">
                         <label for="new-business-author">Author of the book: </label>
-                        <input type="text" name="new-business-author" id="new-business-author" placeholder="Author" required>
+                        <input type="text" name="new-business-author" id="new-business-author" placeholder="Sebastian Mallaby" required>
                     </div>
             
                     <div class="form-item">
                         <label for="new-business-pages">Number of pages: </label>
-                        <input type="number" name="new-business-pages" id="new-business-pages" placeholder="Number of pages" required>
+                        <input type="number" name="new-business-pages" id="new-business-pages" placeholder="492" required>
                     </div>
             
                     <div class="form-item">
@@ -86,7 +92,7 @@
                     </div>
             
                 </form>
-                <input type="submit" id="business-form-submit"> <!--placed it outside of form to prevent sending data. Could have also used event.preventDefault() -->
+                <input type="submit" id="business-form-submit" class="submit-button"> <!--placed it outside of form to prevent sending data. Could have also used event.preventDefault() -->
             </div>
         </div>
 

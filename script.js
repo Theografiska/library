@@ -27,14 +27,27 @@ const getIndex = (array) => {
 
 /* Adding initial books to library */ 
 
-addBookToLibrary(psychologyLibrary, new Book("The Body Keeps the Score", "Bessel van der Kolk", 450, "Read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("Thinking, Fast and Slow", "Daniel Kahneman", 700, "Not read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("Man's Search for Meaning", "Viktor Frankl", 242, "Read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("The Laws of Human Nature", "Robert Greene", 640, "Not read", getIndex(psychologyLibrary)));
+addBookToLibrary(psychologyLibrary, new Book("The Body Keeps the Score", "Bessel van der Kolk", 464, "Read", getIndex(psychologyLibrary)));
+addBookToLibrary(psychologyLibrary, new Book("Thinking, Fast and Slow", "Daniel Kahneman", 499, "Not read", getIndex(psychologyLibrary)));
+addBookToLibrary(psychologyLibrary, new Book("Man's Search for Meaning", "Viktor E. Frankl", 165, "Read", getIndex(psychologyLibrary)));
+addBookToLibrary(psychologyLibrary, new Book("The Laws of Human Nature", "Robert Greene", 624, "Not read", getIndex(psychologyLibrary)));
 
 console.log(psychologyLibrary); // TEST
 
 const psychCardContainer = document.querySelector("#psych-card-container");
+
+/* changing background color of read statuses */
+const changeReadStatusStyle = () => {
+    let allReadStatuses = document.querySelectorAll(".book-content:nth-child(4)");
+    allReadStatuses.forEach((status) => {
+        if (status.textContent === "Read") {
+            status.style.color = "#023E8A";
+        } else {
+            status.style.color = "#800020";
+        }
+        status.style.fontWeight = "bold";
+    })
+}
 
 const loopThroughArray = array => { // this is a reusable function that I can use for both psychology and business section
     for (let i = 0; i < array.length; i++) {
@@ -61,8 +74,9 @@ const loopThroughArray = array => { // this is a reusable function that I can us
         }
         addContent();
 
-        /* toggle reading status button and functionality */
+        changeReadStatusStyle(); // changing color         
 
+        /* toggle reading status button and functionality */
         let readButton = document.createElement("button");
         readButton.textContent = "Update reading status";
         readButton.classList.add("read-btn");
@@ -74,10 +88,12 @@ const loopThroughArray = array => { // this is a reusable function that I can us
             if(array[i].read === "Read") {
                 textElements.textContent = "";
                 addContent();
+
             } else if(array[i].read === "Not read") {
                 textElements.textContent = "";
                 addContent();
             }
+            changeReadStatusStyle(); // changing color         
         })
 
         /* functionality to delete a book */
@@ -126,7 +142,7 @@ addPsychBookButton.addEventListener("click", () => {
     psychFormSection.style.display = "flex";
     addPsychBookButton.style.display = "none";
 
-    /* resetting data */
+    /* resetting data in the form */
     
     let newTitle = document.querySelector("#new-title");
     let newAuthor = document.querySelector("#new-author");
@@ -173,6 +189,8 @@ psychFormSubmitbutton.addEventListener("click", () => {
         })
     }
     addMoreContent();
+
+    changeReadStatusStyle();
     
     /* toggle reading status button and functionality */
 
@@ -192,6 +210,7 @@ psychFormSubmitbutton.addEventListener("click", () => {
             textElements.textContent = "";
             addMoreContent();
         }
+        changeReadStatusStyle(); // changing color         
     })
     
     /* functionality to delete a book */
@@ -226,11 +245,10 @@ let businessLibrary = [];
 
 /* Adding initial books to library */ 
 
-addBookToLibrary(businessLibrary, new Book("What you don't learn at Harvard Business School", "Some Author", 450, "Read", getIndex(businessLibrary)));
+addBookToLibrary(businessLibrary, new Book("What They Don't Teach You at Harvard Business School", "Mark H. McCormack", 288, "Read", getIndex(businessLibrary)));
 
 console.log(businessLibrary); // TEST
 
-/* populating the business section with some initial books: */
 const businessCardContainer = document.querySelector("#business-card-container");
 
 loopThroughArray(businessLibrary);
@@ -262,10 +280,10 @@ const businessFormSubmitbutton = document.querySelector("#business-form-submit")
 businessFormSubmitbutton.addEventListener("click", () => {
     addBusinessBookButton.style.display = "block";
 
-    let newBusinessTitle = document.querySelector("#new-title").value;
-    let newBusinessAuthor = document.querySelector("#new-author").value;
-    let newBusinessPages = document.querySelector("#new-pages").value;
-    let newBusinessRead = document.querySelector("#new-read").value;
+    let newBusinessTitle = document.querySelector("#new-business-title").value;
+    let newBusinessAuthor = document.querySelector("#new-business-author").value;
+    let newBusinessPages = document.querySelector("#new-business-pages").value;
+    let newBusinessRead = document.querySelector("#new-business-read").value;
     let newBusinessIndex = businessLibrary.length;
 
     const anotherBook = new Book(newBusinessTitle, newBusinessAuthor, newBusinessPages, newBusinessRead, newBusinessIndex);
@@ -290,6 +308,8 @@ businessFormSubmitbutton.addEventListener("click", () => {
         })
     }
     addMoreContent();
+
+    changeReadStatusStyle();
     
     /* toggle reading status button and functionality */
 
@@ -309,6 +329,7 @@ businessFormSubmitbutton.addEventListener("click", () => {
             textElements.textContent = "";
             addMoreContent();
         }
+        changeReadStatusStyle(); // changing color         
     })
     
     /* functionality to delete a book */
@@ -335,3 +356,4 @@ businessFormSubmitbutton.addEventListener("click", () => {
 
     businessFormSection.style.display = "none"; /* hiding the form again */
 })
+

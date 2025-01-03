@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-color: #435643;
     color: beige;
 }
 
@@ -19,12 +20,26 @@ header {
     width: 100vw;
     height: 8rem;
     display: flex;
+    position: relative;
+    z-index: 1000;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 1rem; 
     background-color: #F4DDb4;
     border-bottom-right-radius: .5rem;
     border-bottom-left-radius: .5rem;
     box-shadow: 4px 4px 8px #3f3c36;
+}
+
+nav ul {
+    display: flex;
+    margin-right: 2rem;
+    color: black;
+}
+
+li {
+    list-style: none;
+    margin: 0 2rem;
 }
 
 h1 {
@@ -35,6 +50,19 @@ h1 {
 
 h2 {
     margin: 2rem 0;
+    position: relative; /* this is used to create correct linking of headings! */
+}
+
+/* 
+h2 span {  this is used to create correct linking of headings!
+    position: absolute;
+    top: -8rem;
+}
+*/
+
+a {
+    color: black;
+    text-decoration: none;
 }
 
 #psychology-section, #business-section {
@@ -57,7 +85,7 @@ h2 {
 .card-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: .5rem;
+    gap: 1rem;
 }
 
 @media screen and (max-width: 1000px) {
@@ -82,15 +110,15 @@ h2 {
     padding: 3rem 1.5rem;
     background-color: #755526;
     color: white;
-    text-align: center;
     max-width: 350px;
+    text-align: center;
     border: 2px solid black;
     border-radius: .5rem;
     box-shadow: 4px 4px 8px #3f3c36;
 }
 
 .book-card p {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 }
 
 .book-content:first-child { /* highlighting the title */
@@ -146,9 +174,30 @@ h2 {
 }
 
 input, select {
+    padding: .5rem .25rem;
     height: 2rem;
     max-width: 400px;
     margin-bottom: .5rem;
+    border-radius: .25rem;
+}
+
+input:invalid {
+    border: 1px solid red;
+}
+
+input:valid {
+    border: 2px solid greenyellow;
+}
+
+input:focus {
+    border: 1px solid blue;
+    box-shadow: 1px 1px 5px lightgray;
+}
+
+label {
+    text-transform: uppercase;
+    padding-bottom: .25rem;
+    font-size: .8rem;
 }
 
 form h3 {
@@ -161,14 +210,16 @@ form h3 {
 }
 
 
-#psych-form-submit, #business-form-submit {
-    padding: 0.5rem;
+input[type="submit"] {
+    padding: 0.5rem 1rem;
     margin: 1rem auto;
     background-color: #755526;
     color: beige;
     border-radius: 1rem;
     border: none;
     box-shadow: 4px 4px 8px #3f3c36;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 footer {
