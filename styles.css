@@ -16,6 +16,18 @@ header {
     padding: 2rem 1rem;
 }
 
+@media  screen and (max-width: 600px) {
+    #card-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media  screen and (max-width: 400px) {
+    #card-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 .book-card {
     display: flex;
     flex-direction: column;
@@ -31,7 +43,7 @@ header {
     font-weight: bold;
 }
 
-.book-content:nth-child(5) { /* hiding the index number */
+.book-content:nth-child(5), .book-content:nth-child(6) { /* hiding the index number and function */
     display: none;
 }
 
@@ -71,4 +83,8 @@ form input, form select {
 #form-submit {
     margin: 0 1rem;
     padding: 0.5rem;
+}
+
+.delete-btn, .read-btn {
+    width: 150px;
 }

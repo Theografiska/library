@@ -6,14 +6,18 @@ function Book(title, author, length, read, index) {
 	this.length = length;
 	this.read = read;
     this.index = index;
-    /*
-	this.info = function() {
-		return `${this.title} by ${this.author}, ${this.length} pages, ${this.read}.`;
-	};*/
+    
+	this.toggleRead = function() {
+		if(this.read === "Not read") {
+           return this.read = "Read";
+        } else if(this.read === "Read") {
+           return this.read = "Not read";
+        }
+	};
 }
 
-function addBookToLibrary(object) {
-    myLibrary.push(object);
+function addBookToLibrary(bookObject) {
+    myLibrary.push(bookObject);
 }
 
 /* Adding initial books to library */ 
@@ -25,13 +29,13 @@ const getIndex = () => {
 const bodyKeepsScore = new Book("The Body Keeps the Score", "Bessel van der Kolk", 450, "Read", getIndex());
 addBookToLibrary(bodyKeepsScore);
 
-const thinkingFastSlow = new Book("Thinking, Fast and Slow", "Daniel Kahneman", 700, "Currently reading", getIndex());
+const thinkingFastSlow = new Book("Thinking, Fast and Slow", "Daniel Kahneman", 700, "Not read", getIndex());
 addBookToLibrary(thinkingFastSlow);
 
 const mansSearchForMeaning = new Book("Man's Search for Meaning", "Viktor Frankl", 242, "Read", getIndex());
 addBookToLibrary(mansSearchForMeaning);
 
-const lawsOfHumanNature = new Book("The Laws of Human Nature", "Robert Greene", 640, "Read", getIndex());
+const lawsOfHumanNature = new Book("The Laws of Human Nature", "Robert Greene", 640, "Not read", getIndex());
 addBookToLibrary(lawsOfHumanNature);
 
 console.log(myLibrary);
@@ -41,18 +45,48 @@ const cardContainer = document.querySelector("#card-container");
 const loopThroughArray = array => {
     for (let i = 0; i < array.length; i++) {
         let bookCard = document.createElement("div");
-
         bookCard.classList.add("book-card");
-        
         cardContainer.appendChild(bookCard);
 
-        Object.values(array[i]).forEach(value => {
-            let bookContent = document.createElement("p");
-            bookContent.textContent = "";
-            bookContent.classList.add("book-content");
-            bookCard.appendChild(bookContent);
+        let textElements = document.createElement("div");
+        textElements.classList.add("text-elements");
+        bookCard.appendChild(textElements);
 
-            bookContent.textContent += value;
+        const addContent = () => {
+            Object.values(array[i]).forEach(value => {
+                let bookContent = document.createElement("p");
+                bookContent.classList.add("book-content");
+                textElements.appendChild(bookContent);
+    
+                bookContent.textContent += value;
+            })
+        }
+        addContent();
+
+        /* toggle reading status button and functionality */
+
+        let readButton = document.createElement("button");
+        if(array[i].read === "Read") {
+            readButton.textContent = "Not read";
+        } else if(array[i].read === "Not read") {
+            readButton.textContent = "Read";
+        }
+        readButton.classList.add("read-btn");
+        bookCard.appendChild(readButton);
+
+        readButton.addEventListener("click", () => {
+            array[i].toggleRead(); // changing the read status on the object
+            console.log(myLibrary); // test
+
+            if(array[i].read === "Read") {
+                textElements.textContent = "";
+                addContent();
+                readButton.textContent = "Not read";
+            } else if(array[i].read === "Not read") {
+                textElements.textContent = "";
+                addContent();
+                readButton.textContent = "Read";
+            }
         })
 
         /* functionality to delete a book */
@@ -74,8 +108,8 @@ const loopThroughArray = array => {
             for (let j=0; j < myLibrary.length; j++) {
                 myLibrary[j].index = j;
             }
+            console.log(myLibrary);
         })
-        
     }
 }
 
@@ -101,7 +135,7 @@ addBookButton.addEventListener("click", () => {
     newRead.value = "Read";
 })
 
-/* clicking submit adds creates a new book card */
+/* clicking submit creates a new book card */
 const formSubmitbutton = document.querySelector("#form-submit");
 
 formSubmitbutton.addEventListener("click", () => {
@@ -110,24 +144,56 @@ formSubmitbutton.addEventListener("click", () => {
     let newPages = document.querySelector("#new-pages").value;
     let newRead = document.querySelector("#new-read").value;
     let newIndex = myLibrary.length;
-    console.log(newIndex);
 
     const anotherBook = new Book(newTitle, newAuthor, newPages, newRead, newIndex);
-    myLibrary.push(anotherBook);
+    addBookToLibrary(anotherBook);
 
     let bookCard = document.createElement("div");
     bookCard.classList.add("book-card");
-        
     cardContainer.appendChild(bookCard);
 
-    Object.values(anotherBook).forEach(value => {
+    let textElements = document.createElement("div");
+    textElements.classList.add("text-elements");
+    bookCard.appendChild(textElements);
+
+    const addMoreContent = () => {
+        Object.values(anotherBook).forEach(value => {
             let bookContent = document.createElement("p");
             bookContent.textContent = "";
             bookContent.classList.add("book-content");
-            bookCard.appendChild(bookContent);
+            textElements.appendChild(bookContent);
 
             bookContent.textContent += value;
         })
+    }
+    addMoreContent();
+    
+    /* toggle reading status button and functionality */
+
+    let readButton = document.createElement("button");
+    readButton.textContent = "Toggle reading status";
+    if(anotherBook.read === "Read") {
+        readButton.textContent = "Not read";
+    } else if(anotherBook.read === "Not read") {
+        readButton.textContent = "Read";
+    }
+    readButton.classList.add("read-btn");
+    bookCard.appendChild(readButton);
+
+    readButton.addEventListener("click", () => {
+        myLibrary[newIndex].toggleRead(); // changing the read status on the object
+        console.log(myLibrary); // test
+
+        if(myLibrary[newIndex].read === "Read") {
+            textElements.textContent = "";
+            addMoreContent();
+            readButton.textContent = "Not read";
+        } else if(myLibrary[newIndex].read === "Not read") {
+            textElements.textContent = "";
+            addMoreContent();
+            readButton.textContent = "Read";
+        }
+    })
     
     /* functionality to delete a book */
     let deleteButton = document.createElement("button");
@@ -146,6 +212,7 @@ formSubmitbutton.addEventListener("click", () => {
         for (let j=0; j < myLibrary.length; j++) {
             myLibrary[j].index = j;
         }
+        console.log(myLibrary);
     })
 
     console.log(myLibrary);
