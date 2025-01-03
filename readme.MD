@@ -2,6 +2,8 @@
 
 This is a Library App created as part of an Odin Project assignment. It allows users to add, display, update, and remove books from their personal library.
 
+See it live here: https://theografiska.github.io/library/. 
+
 ---
 
 ## Features
