@@ -27,8 +27,12 @@ header {
     border-radius: .5rem;
 }
 
-.book-content:first-child {
+.book-content:first-child { /* highlighting the title */
     font-weight: bold;
+}
+
+.book-content:nth-child(5) { /* hiding the index number */
+    display: none;
 }
 
 #add-book-btn {
