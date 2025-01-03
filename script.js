@@ -36,11 +36,15 @@ console.log(psychologyLibrary); // TEST
 
 const psychCardContainer = document.querySelector("#psych-card-container");
 
-const loopThroughPsychArray = array => {
+const loopThroughArray = array => { // this is a reusable function that I can use for both psychology and business section
     for (let i = 0; i < array.length; i++) {
         let bookCard = document.createElement("div");
         bookCard.classList.add("book-card");
-        psychCardContainer.appendChild(bookCard);
+        if (array === psychologyLibrary) {
+            psychCardContainer.appendChild(bookCard);
+        } else {
+            businessCardContainer.appendChild(bookCard);
+        }
 
         let textElements = document.createElement("div");
         textElements.classList.add("text-elements");
@@ -66,7 +70,6 @@ const loopThroughPsychArray = array => {
 
         readButton.addEventListener("click", () => {
             array[i].toggleRead(); // changing the read status on the object
-            console.log(psychologyLibrary); // test
 
             if(array[i].read === "Read") {
                 textElements.textContent = "";
@@ -88,20 +91,32 @@ const loopThroughPsychArray = array => {
             /* removing item from the DOM */
             bookCard.remove();
             /* removing item from the array */
-            psychologyLibrary = psychologyLibrary.filter((object) => {
-                return object.index !== i; 
-            })
-
-            /* updating indexes */
-            for (let j=0; j < psychologyLibrary.length; j++) {
-                psychologyLibrary[j].index = j;
+            if (array === psychologyLibrary) {
+                psychologyLibrary = psychologyLibrary.filter((object) => {
+                    return object.index !== i; 
+                })
+            } else {
+                businessLibrary = businessLibrary.filter((object) => {
+                    return object.index !== i; 
+                })
             }
-            console.log(psychologyLibrary);
+            /* updating indexes */
+            if (array === psychologyLibrary) {
+                for (let j=0; j < psychologyLibrary.length; j++) {
+                    psychologyLibrary[j].index = j;
+                }
+                console.log(psychologyLibrary);
+            } else {
+                for (let j=0; j < businessLibrary.length; j++) {
+                    businessLibrary[j].index = j;
+                }
+            }
+
         })
     }
 }
 
-loopThroughPsychArray(psychologyLibrary);
+loopThroughArray(psychologyLibrary);
 
 /* clicking add new book brings out the form */
 const addPsychBookButton = document.querySelector("#add-psych-book-btn");
@@ -205,12 +220,6 @@ psychFormSubmitbutton.addEventListener("click", () => {
 })
 
 
-
-
-
-
-
-
 /* business section */
 
 let businessLibrary = [];
@@ -218,83 +227,13 @@ let businessLibrary = [];
 /* Adding initial books to library */ 
 
 addBookToLibrary(businessLibrary, new Book("What you don't learn at Harvard Business School", "Some Author", 450, "Read", getIndex(businessLibrary)));
-addBookToLibrary(businessLibrary, new Book("Thinking, Fast and Slow", "Daniel Kahneman", 700, "Not read", getIndex(businessLibrary)));
-addBookToLibrary(businessLibrary, new Book("Man's Search for Meaning", "Viktor Frankl", 242, "Read", getIndex(businessLibrary)));
-addBookToLibrary(businessLibrary, new Book("The Laws of Human Nature", "Robert Greene", 640, "Not read", getIndex(businessLibrary)));
 
 console.log(businessLibrary); // TEST
 
+/* populating the business section with some initial books: */
 const businessCardContainer = document.querySelector("#business-card-container");
 
-const loopThroughBusinessArray = array => {
-    for (let i = 0; i < array.length; i++) {
-        let bookCard = document.createElement("div");
-        bookCard.classList.add("book-card");
-        businessCardContainer.appendChild(bookCard);
-
-        let textElements = document.createElement("div");
-        textElements.classList.add("text-elements");
-        bookCard.appendChild(textElements);
-
-        const addContent = () => {
-            Object.values(array[i]).forEach(value => {
-                let bookContent = document.createElement("p");
-                bookContent.classList.add("book-content");
-                textElements.appendChild(bookContent);
-    
-                bookContent.textContent += value;
-            })
-        }
-        addContent();
-
-        /* toggle reading status button and functionality */
-
-        let readButton = document.createElement("button");
-        readButton.textContent = "Update reading status";
-        readButton.classList.add("read-btn");
-        bookCard.appendChild(readButton);
-
-        readButton.addEventListener("click", () => {
-            array[i].toggleRead(); // changing the read status on the object
-            console.log(businessLibrary); // test
-
-            if(array[i].read === "Read") {
-                textElements.textContent = "";
-                addContent();
-            } else if(array[i].read === "Not read") {
-                textElements.textContent = "";
-                addContent();
-            }
-        })
-
-        /* functionality to delete a book */
-        
-        let deleteButton = document.createElement("button");
-        deleteButton.textContent = "X";
-        deleteButton.classList.add("delete-btn");
-        bookCard.appendChild(deleteButton);
-
-        deleteButton.addEventListener("click", () => {
-            /* removing item from the DOM */
-            bookCard.remove();
-            /* removing item from the array */
-            businessLibrary = businessLibrary.filter((object) => {
-                return object.index !== i; 
-            })
-
-            /* updating indexes */
-            for (let j=0; j < businessLibrary.length; j++) {
-                businessLibrary[j].index = j;
-            }
-            console.log(businessLibrary);
-        })
-    }
-}
-
-loopThroughBusinessArray(businessLibrary);
-
-
-
+loopThroughArray(businessLibrary);
 
 /* clicking add new book brings out the form */
 const addBusinessBookButton = document.querySelector("#add-business-book-btn");
@@ -327,7 +266,7 @@ businessFormSubmitbutton.addEventListener("click", () => {
     let newBusinessAuthor = document.querySelector("#new-author").value;
     let newBusinessPages = document.querySelector("#new-pages").value;
     let newBusinessRead = document.querySelector("#new-read").value;
-    let newBusinessIndex = psychologyLibrary.length;
+    let newBusinessIndex = businessLibrary.length;
 
     const anotherBook = new Book(newBusinessTitle, newBusinessAuthor, newBusinessPages, newBusinessRead, newBusinessIndex);
     addBookToLibrary(businessLibrary, anotherBook);
