@@ -1,5 +1,18 @@
 const psychCardContainer = document.querySelector("#psych-card-container");
+const addPsychBookButton = document.querySelector("#add-psych-book-btn");
+const psychFormSection = document.querySelector("#psych-form-section");
+const newTitle = document.querySelector("#new-title");
+const newAuthor = document.querySelector("#new-author");
+const newPages = document.querySelector("#new-pages");
+const newRead = document.querySelector("#new-read");
+
 const businessCardContainer = document.querySelector("#business-card-container");
+const addBusinessBookButton = document.querySelector("#add-business-book-btn");
+const businessFormSection = document.querySelector("#business-form-section");
+const newBusinessTitle = document.querySelector("#new-business-title");
+const newBusinessAuthor = document.querySelector("#new-business-author");
+const newBusinessPages = document.querySelector("#new-business-pages");
+const newBusinessRead = document.querySelector("#new-business-read");
 
 let psychologyLibrary = [];
 
@@ -140,20 +153,11 @@ const loopThroughArray = array => { // this is a reusable function that I can us
 loopThroughArray(psychologyLibrary);
 
 /* clicking add new book brings out the form */
-const addPsychBookButton = document.querySelector("#add-psych-book-btn");
-const psychFormSection = document.querySelector("#psych-form-section");
-
 addPsychBookButton.addEventListener("click", () => {
     psychFormSection.style.display = "flex";
     addPsychBookButton.style.display = "none";
 
     /* resetting data in the form */
-    
-    let newTitle = document.querySelector("#new-title");
-    let newAuthor = document.querySelector("#new-author");
-    let newPages = document.querySelector("#new-pages");
-    let newRead = document.querySelector("#new-read");
-
     newTitle.value = "";
     newAuthor.value = "";
     newPages.value = "";
@@ -243,7 +247,6 @@ psychFormSubmitbutton.addEventListener("click", () => {
     psychFormSection.style.display = "none"; /* hiding the form again */
 })
 
-
 /* business section */
 
 let businessLibrary = [];
@@ -257,20 +260,11 @@ console.log(businessLibrary); // TEST
 loopThroughArray(businessLibrary);
 
 /* clicking add new book brings out the form */
-const addBusinessBookButton = document.querySelector("#add-business-book-btn");
-const businessFormSection = document.querySelector("#business-form-section");
-
 addBusinessBookButton.addEventListener("click", () => {
     businessFormSection.style.display = "flex";
     addBusinessBookButton.style.display = "none";
 
     /* resetting data */
-    
-    let newBusinessTitle = document.querySelector("#new-business-title");
-    let newBusinessAuthor = document.querySelector("#new-business-author");
-    let newBusinessPages = document.querySelector("#new-business-pages");
-    let newBusinessRead = document.querySelector("#new-business-read");
-
     newBusinessTitle.value = "";
     newBusinessAuthor.value = "";
     newBusinessPages.value = "";
