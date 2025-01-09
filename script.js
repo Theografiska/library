@@ -1,20 +1,32 @@
+const psychCardContainer = document.querySelector("#psych-card-container");
+const businessCardContainer = document.querySelector("#business-card-container");
+
 let psychologyLibrary = [];
 
-function Book(title, author, length, read, index) {
-	this.title = title;
-	this.author = author;
-	this.length = length;
-	this.read = read;
-    this.index = index;
-    
-	this.toggleRead = function() {
-		if(this.read === "Not read") {
-           return this.read = "Read";
-        } else if(this.read === "Read") {
-           return this.read = "Not read";
-        }
-	};
+// refactored to class
+class Book {
+    constructor(title, author, length, read, index) {
+        this.title = title;
+        this.author = author;
+        this.length = length;
+        this.read = read;
+        this._index = index;
+    }
+
+    toggleRead() {
+        this.read = this.read === "Read" ? "Not read" : "Read";
+        return this.read;
+    }
+
+    get bookIndex() {
+        return this._index;
+    }
+
+    set bookIndex(array) {
+        this._index = getIndex(array);
+    }
 }
+
 
 function addBookToLibrary(array, bookObject) {
     array.push(bookObject);
@@ -27,25 +39,18 @@ const getIndex = (array) => {
 
 /* Adding initial books to library */ 
 
-addBookToLibrary(psychologyLibrary, new Book("The Body Keeps the Score", "Bessel van der Kolk", 464, "Read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("Thinking, Fast and Slow", "Daniel Kahneman", 499, "Not read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("Man's Search for Meaning", "Viktor E. Frankl", 165, "Read", getIndex(psychologyLibrary)));
-addBookToLibrary(psychologyLibrary, new Book("The Laws of Human Nature", "Robert Greene", 624, "Not read", getIndex(psychologyLibrary)));
+addBookToLibrary(psychologyLibrary, new Book("The Body Keeps the Score", "Bessel van der Kolk", 464, "Read", psychologyLibrary.length));
+addBookToLibrary(psychologyLibrary, new Book("Thinking, Fast and Slow", "Daniel Kahneman", 499, "Not read", psychologyLibrary.length));
+addBookToLibrary(psychologyLibrary, new Book("Man's Search for Meaning", "Viktor E. Frankl", 165, "Read", psychologyLibrary.length));
+addBookToLibrary(psychologyLibrary, new Book("The Laws of Human Nature", "Robert Greene", 624, "Not read", psychologyLibrary.length));
 
 console.log(psychologyLibrary); // TEST
-
-const psychCardContainer = document.querySelector("#psych-card-container");
 
 /* changing background color of read statuses */
 const changeReadStatusStyle = () => {
     let allReadStatuses = document.querySelectorAll(".book-content:nth-child(4)");
     allReadStatuses.forEach((status) => {
-        if (status.textContent === "Read") {
-            status.style.color = "#023E8A";
-        } else {
-            status.style.color = "#800020";
-        }
-        status.style.fontWeight = "bold";
+        status = status.textContent === "Read" ? status.style.color = "#023E8A" : status.style.color = "#800020";
     })
 }
 
@@ -248,8 +253,6 @@ let businessLibrary = [];
 addBookToLibrary(businessLibrary, new Book("What They Don't Teach You at Harvard Business School", "Mark H. McCormack", 288, "Read", getIndex(businessLibrary)));
 
 console.log(businessLibrary); // TEST
-
-const businessCardContainer = document.querySelector("#business-card-container");
 
 loopThroughArray(businessLibrary);
 
